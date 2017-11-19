@@ -1,0 +1,32 @@
+bool dem(vector<int>count, int k)
+{
+    int val = 0;
+    for (int i=0; i<26; i++)
+        if (count[i] !=0 )
+            val++;
+    return k >= val;
+}
+
+int longestSubstring(string s, int m) {
+ vector<int> a(26,0);
+ set<char> b;
+    int t1=0,t2=0,t3=1,t4=0;
+ for(int i=0;i<s.size();i++){
+  b.insert(s[i]);
+ }
+ if(b.size()<m) return 0;
+ a[s[0]-'a']++;
+ for(int i=1;i<s.size();i++){
+     a[s[i]-'a']++;
+     t2++;
+     while(!dem(a,m)){
+         a[s[t1]-'a']--;
+         t1++;
+     }
+     if(t2-t1>t3){
+         t3=t2-t1;
+         t4=t1;
+     }
+ }
+    return t3+1;
+}
